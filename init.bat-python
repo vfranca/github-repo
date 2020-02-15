@@ -1,12 +1,21 @@
 @echo off
+
+rem tarefas automatizadas para iniciar um repositório python
+rem executar o comando init 2 vezes
+rem a 1a vez criará o virtualenv
+rem a 2a vez executará as tarefas restantes
+
+if not exist venv (
 py -m venv venv
 venv\scripts\activate
-py -m pip install --upgrade pip
+)
+py -tm pip install --upgrade pip
 git init
 git flow init
 copy %homepath%\github-repo\LICENSE
 copy %homepath%\github-repo\.gitignore-python .gitignore
 copy %homepath%\github-repo\.editorconfig-python .editorconfig
+copy %homepath%\github-repo\make.bat-python make.bat
 copy %homepath%\github-repo\README.md
 del README.rst
 poetry build
